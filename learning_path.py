@@ -5,7 +5,7 @@ if _extra not in sys.path:
 
 import google.genai as genai
 
-def get_learning_recommendations(topic: str, api_key: str, model: str = "gemini-3-flash-preview") -> str:
+def get_learning_recommendations(topic: str, api_key: str, model: str = "gemini-2.0-flash") -> str:
     try:
         client = genai.Client(api_key=api_key)
 

@@ -5,7 +5,7 @@ if _extra not in sys.path:
 
 import google.genai as genai
 
-def answer_question_with_gemini(question: str, api_key: str, model: str = "gemini-3-flash-preview") -> str:
+def answer_question_with_gemini(question: str, api_key: str, model: str = "gemini-2.0-flash") -> str:
     try:
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(

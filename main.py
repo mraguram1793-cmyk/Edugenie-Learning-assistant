@@ -9,8 +9,6 @@ if _extra not in sys.path:
 
 from fastapi import FastAPI, Request, Query
 from fastapi.responses import JSONResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
@@ -39,9 +37,7 @@ app.add_middleware(
 )
 
 
-# Mount static files and templates
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# Frontend is served by Live Server (port 5500); no static mount needed.
 
 # ─────────────────────────────────────────
 # Global exception handler – always JSON
@@ -63,11 +59,11 @@ def _check_api_key():
     return None
 
 # ─────────────────────────────────────────
-# Root – Serve Frontend
+# Root – Health check
 # ─────────────────────────────────────────
 @app.get("/")
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+async def root():
+    return {"status": "EduGenie API is running"}
 
 # ─────────────────────────────────────────
 # Q&A – GET API using Gemini
